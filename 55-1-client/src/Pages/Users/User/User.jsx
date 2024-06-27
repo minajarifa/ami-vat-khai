@@ -1,31 +1,36 @@
-
+import { MdSecurityUpdate } from "react-icons/md";
 import { FaTrash } from "react-icons/fa";
-const User = ({user}) => {
-    const{
-        email,
-        password
-        
-        }=user;
-        const handleDelete = (_id)=>{
-            console.log(_id);
-            fetch(`http://localhost:5000/users/${_id}`,{
-                method:'DELETE',
+import { Link } from "react-router-dom";
+const User = ({ user }) => {
+  const { email, password } = user;
 
-            })
-            .then(response=>response.json())
-            .then(data=>{
-                console.log(data)
-            })
-        }
-    return (
-        <div className="m-5 flex">
-           <div>
-           <h1>{email}</h1>
-           <h1>{password}</h1>
-           </div>
-            <button onClick={()=>handleDelete(user._id)} className="ml-5 text-red-700"><FaTrash /></button>
-        </div>
-    );
+  const handleDeleted = (_id) => {
+    fetch(`http://localhost:5000/users/${_id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+  return (
+    <div className="m-5 flex">
+      <div>
+        <h1>{email}</h1>
+        <h1>{password}</h1>
+      </div>
+      <div className="ml-5 ">
+        <Link to={`/Update/${user._id}`}>
+          <button >
+            <MdSecurityUpdate />
+          </button>
+        </Link>
+        <button className="text-red-700" onClick={() => handleDeleted(user._id)}>
+          <FaTrash />
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default User;

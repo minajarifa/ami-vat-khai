@@ -11,6 +11,7 @@ import Register from "./AuthProviders/Register/Register.jsx";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
 import AuthProvider from "./AuthProviders/Auth/AuthProvider.jsx";
 import Users from "./Pages/Users/Users.jsx";
+import PrivetRouters from "./Layout/PrivateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,9 @@ const router = createBrowserRouter([
         element: <Home />,
       },{
         path: "/Users",
-        element: <Users/>,
+        element: <PrivetRouters>
+          <Users/>
+        </PrivetRouters>,
       },
       {
         path: "/Login",
