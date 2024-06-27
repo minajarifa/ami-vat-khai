@@ -1,6 +1,6 @@
 
 import { FaTrash } from "react-icons/fa";
-const user = ({user}) => {
+const User = ({user}) => {
     const{
         email,
         password
@@ -28,4 +28,4 @@ const user = ({user}) => {
     );
 };
 
-export default user;
+export default User;
