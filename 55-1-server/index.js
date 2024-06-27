@@ -45,8 +45,17 @@ async function run() {
     app.put('/users/:id',async(req,res)=>{
       const id = req.params.id;
       const users = req.body;
-      console.log(id,users);
-      // c/.send(result);
+      // console.log(id,users);
+      const filter = {_id: new ObjectId(id)};
+      const options ={upsert:true}
+    const  updateUser={
+        $set:{
+          email:users.email,
+          password: users.password
+        }
+      }
+       const result= await userCollection.updateOne(filter,updateUser,options)
+      res.send(result);
     })
 
     app.delete("/users/:id", async (req, res) => {
