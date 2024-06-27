@@ -11,6 +11,9 @@ const User = ({ user }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        if (data.deletedCount) {
+          alert("deletedCount successfully");
+        }
       });
   };
   return (
@@ -21,11 +24,14 @@ const User = ({ user }) => {
       </div>
       <div className="ml-5 ">
         <Link to={`/Update/${user._id}`}>
-          <button >
+          <button>
             <MdSecurityUpdate />
           </button>
         </Link>
-        <button className="text-red-700" onClick={() => handleDeleted(user._id)}>
+        <button
+          className="text-red-700"
+          onClick={() => handleDeleted(user._id)}
+        >
           <FaTrash />
         </button>
       </div>

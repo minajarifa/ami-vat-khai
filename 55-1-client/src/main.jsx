@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-
 import "./index.css";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/home/Home/Home.jsx";
 import Login from "./AuthProviders/Login/Login.jsx";
@@ -12,6 +10,7 @@ import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
 import AuthProvider from "./AuthProviders/Auth/AuthProvider.jsx";
 import Users from "./Pages/Users/Users.jsx";
 import PrivetRouters from "./Layout/PrivateRoute/PrivateRoute.jsx";
+import Update from "./Pages/Update/Update.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +21,23 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-      },{
+      },
+      {
         path: "/Users",
-        element: <PrivetRouters>
-          <Users/>
-        </PrivetRouters>,
+        element: (
+          <PrivetRouters>
+            <Users />
+          </PrivetRouters>
+        ),
+      },
+      {
+        path: "/Update/:id",
+        element: (
+          <PrivetRouters>
+            <Update />
+          </PrivetRouters>
+        ),
+        loader: ({ params }) =>  fetch(`http://localhost:5000/users/${params.id}`),
       },
       {
         path: "/Login",
@@ -34,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/Register",
-        element: <Register/>,
+        element: <Register />,
       },
     ],
   },
