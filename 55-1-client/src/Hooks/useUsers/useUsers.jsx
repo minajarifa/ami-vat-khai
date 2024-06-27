@@ -7,8 +7,8 @@ const useUsers = () => {
    fetch('http://localhost:5000/users')
    .then(response=>response.json())
    .then(data=>{
-     
-      setUsers(data)
+     setUsers(data)
+  
    })
  },[])
   return [users];
