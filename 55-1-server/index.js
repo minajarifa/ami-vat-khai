@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
 // middleware
@@ -24,16 +24,23 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
-    const userCollection = client.db('MyUsers').collection('users');
-    app.get('/users',async(req,res)=>{
+    const userCollection = client.db("MyUsers").collection("users");
+    app.get("/users", async (req, res) => {
       const result = await userCollection.find().toArray();
       res.send(result);
-    })
-    app.post('/users',async(req,res)=>{
+    });
+    app.post("/users", async (req, res) => {
       const users = req.body;
-      const result = await userCollection.insertOne(users)
-      res.send(result)
-    })
+      const result = await userCollection.insertOne(users);
+      res.send(result);
+    });
+    app.delete("/users/:id", async (req, res) => {
+      const users = req.params.id;
+      console.log("please delete for database", users);
+      const query = { _id: id };
+      const result = await userCollection.deleteOne(query);
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
