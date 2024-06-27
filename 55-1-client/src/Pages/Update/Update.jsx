@@ -2,13 +2,14 @@ import { useLoaderData } from "react-router-dom";
 
 const Update = () => {
   const LoadedData = useLoaderData();
-  console.log(LoadedData);
+  console.log('LoadedUser',LoadedData);
   const handleUpdateBtn = (event) => {
     event.preventDefault();
     const from = event.target;
     const email = from.email.value;
     const password = from.password.value;
     const users = { email, password };
+    console.log(users)
     fetch(`http://localhost:5000/users/${LoadedData._id}`,{
         method:'PUT',
         headers:{
