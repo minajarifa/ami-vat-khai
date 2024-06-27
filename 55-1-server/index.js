@@ -29,25 +29,30 @@ async function run() {
       const result = await userCollection.find().toArray();
       res.send(result);
     });
-    app.get('/users/:id',async(req,res)=>{
+    // i get 1 users in this operations
+    app.get("/users/:id", async (req, res) => {
       const id = req.params.id;
-      const query = {_id: new ObjectId(id)}
+      const query = { _id: new ObjectId(id) };
       const result = await userCollection.findOne(query);
       res.send(result);
-    })
+    });
     app.post("/users", async (req, res) => {
       const users = req.body;
       const result = await userCollection.insertOne(users);
       res.send(result);
     });
-    
-    app.delete('/users/:id',async(req,res)=>{
+    // now i update the users 
+    app.put('/users/:id',async(req,res)=>{
+      
+    })
+
+    app.delete("/users/:id", async (req, res) => {
       const id = req.params.id;
-      const query = {_id:new ObjectId(id)}
+      const query = { _id: new ObjectId(id) };
       const result = await userCollection.deleteOne(query);
       res.send(result);
-    })
-   
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
